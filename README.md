@@ -1,0 +1,2 @@
+# MassObjectImageClassification
+数式図形で事前学習した画像分類AI
