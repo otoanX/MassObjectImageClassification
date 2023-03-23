@@ -10,7 +10,7 @@ def createMassObjectDataset(num_dataset:int, num_class:int, size:int):
   y=[]
   for i in range(num_dataset):
     # ポリゴン図形を出力
-    points = [[0.55, 0], [1, 0.83], [0.27, 1], [0.0, 0.9], [0.55, 0]]
+#     points = [[0.55, 0], [1, 0.83], [0.27, 1], [0.0, 0.9], [0.55, 0]]
     points = [[random.randint(0,10), random.randint(0,10)] for i in range(random.randint(1,num_class))]
     patch = patches.Polygon(xy=points, closed=True)
     fig, ax = plt.subplots(figsize=(6, 6))
@@ -23,8 +23,9 @@ def createMassObjectDataset(num_dataset:int, num_class:int, size:int):
     plt.savefig(buf, format='png') # bufferに保持
     enc = np.frombuffer(buf.getvalue(), dtype=np.uint8) # bufferからの読み出し
     dst = cv2.imdecode(enc, 1) # デコード
+    dst = cv2.resize(dst, (size, size))
     dst = dst[:,:,::-1] # BGR->RGB
 #     plt.clf()
     X = X.append(dst)
     y = y.append(len(points))
-    return X, y
+  return X, y
